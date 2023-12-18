@@ -10,6 +10,7 @@
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
+
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
@@ -22,7 +23,7 @@
     "strictPropertyInitialization": false,
     "types": ["vite-plugin-pwa/client"],
 
-    /* paaths */
+    /* paths */
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"]

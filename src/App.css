@@ -1,42 +1,28 @@
 #root {
-  max-width: 1280px;
+  max-width: 480px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 1.5rem;
+  /* text-align: center; */
+  background-color: #f5f5f5;
+  min-height: 100vh;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Gaya scrollbar global WebKit */
+::-webkit-scrollbar {
+  width: 2px; /* Sesuaikan lebar scrollbar sesuai keinginan */
+  height: 2px; /* Sesuaikan tinggi scrollbar sesuai keinginan */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+::-webkit-scrollbar-thumb {
+  background-color: #dcdcdc; /* Warna abu-abu lebih gelap */
+  border-radius: 4px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+/* Sembunyikan scrollbar ketika tidak di-scroll */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #4a4a4a; /* Warna abu-abu lebih gelap saat dihover */
 }
