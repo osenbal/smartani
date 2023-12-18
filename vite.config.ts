@@ -10,9 +10,9 @@ export default defineConfig({
     tsconfigPaths(),
     VitePWA({
       // add this to cache all the imports
-      // workbox: {
-      //   globPatterns: ['**/*'],
-      // },
+      workbox: {
+        globPatterns: ['**/*'],
+      },
       // add this to cache all the
       // static assets in the public folder
       includeAssets: ['**/*'],
