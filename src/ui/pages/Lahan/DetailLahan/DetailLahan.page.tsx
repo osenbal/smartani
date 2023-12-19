@@ -38,7 +38,7 @@ const DetailLahanPage = () => {
         </div>
       </div>
 
-      <div className="rounded-2xl bg-[#F5F5F5] h-screen z-10 relative px-6 py-8">
+      <div className="rounded-2xl bg-[#F5F5F5]  z-10 relative px-6 py-8">
         <div className="flex flex-row justify-between items-end">
           <div className="flex flex-col">
             <p className="text-subTitle2">Lahan 1 dari barat</p>
