@@ -5,6 +5,9 @@ import LoginPage from './ui/pages/Auth/Login/Login.page';
 import RegisterPage from './ui/pages/Auth/Register/Register.page';
 import DetailLahanPage from './ui/pages/Lahan/DetailLahan/DetailLahan.page';
 import TambahLahanPage from './ui/pages/Lahan/TambahLahan/TambahLahan.page';
+import ListNotificationPage from './ui/pages/Notification/List/ListNotification.page';
+import ProfilePage from './ui/pages/Profile/Profile.page';
+import ListKebun from './ui/pages/Kebun/ListKebun.page';
 
 import './App.css';
 
@@ -19,6 +22,12 @@ function App() {
             <Route path="/lahan/:lahanId" element={<DetailLahanPage />} />
 
             <Route path="/tambah-lahan" element={<TambahLahanPage />} />
+
+            <Route path="/notifications" element={<ListNotificationPage />} />
+
+            <Route path="/profile" element={<ProfilePage />} />
+
+            <Route path="/kebun" element={<ListKebun />} />
 
             <Route path="/login" element={<LoginPage />} />
 
