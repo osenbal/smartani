@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useProfileViewModel } from './Profile.viewModel';
 
 const ProfilePage = () => {
-  const { handleLogout } = useProfileViewModel();
+  const { handleLogout, user } = useProfileViewModel();
 
   return (
     <div>
@@ -22,9 +22,9 @@ const ProfilePage = () => {
         />
         <div className="flex flex-col gap-y-2">
           <p className="text-white font-bold text-lg line-clamp-1">
-            ROBERT FOX
+            {user?.displayName || user?.email}
           </p>
-          <span className="text-appDarkGray font-medium ">rober@gmail.com</span>
+          <span className="text-appDarkGray font-medium ">{user?.email}</span>
         </div>
       </div>
 
@@ -41,7 +41,7 @@ const ProfilePage = () => {
             viewBox="0 0 32 32"
             fill="none"
           >
-            <g clip-path="url(#clip0_20_790)">
+            <g clipPath="url(#clip0_20_790)">
               <path
                 d="M16 8.66667V9.33334M16 8.66667C16 6.54494 16.8429 4.51011 18.3431 3.00982C19.8434 1.50953 21.8783 0.666672 24 0.666672H24.6667V9.33334C24.6667 11.6319 23.7536 13.8363 22.1283 15.4616C20.5029 17.0869 18.2985 18 16 18M16 8.66667C16 6.54494 15.1571 4.51011 13.6569 3.00982C12.1566 1.50953 10.1217 0.666672 8 0.666672H7.33333V9.33334C7.33333 11.6319 8.24643 13.8363 9.87174 15.4616C11.4971 17.0869 13.7015 18 16 18M16 18V30.6667M16 18V30M16 31.3333H10C7.87827 31.3333 5.84344 30.4905 4.34315 28.9902C2.84285 27.4899 2 25.4551 2 23.3333H8C10.1217 23.3333 12.1566 24.1762 13.6569 25.6765C15.1571 27.1768 16 29.2116 16 31.3333ZM16 31.3333H22C24.1217 31.3333 26.1566 30.4905 27.6569 28.9902C29.1571 27.4899 30 25.4551 30 23.3333H24C21.8783 23.3333 19.8434 24.1762 18.3431 25.6765C16.8429 27.1768 16 29.2116 16 31.3333Z"
                 stroke="#034221"

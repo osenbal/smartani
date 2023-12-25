@@ -3,20 +3,19 @@ import { useState } from 'react';
 import AppButton from '@/ui/components/AppButton';
 import ToggleSwitch from '@/ui/components/Form/ToggleSwitch';
 import { Link } from 'react-router-dom';
-import {
-  dbRefMoisture,
-  firebaseAuth,
-  dbRefUserSuggestion,
-} from '@/data/firebaseApp';
 import { onValue } from 'firebase/database';
+import { useContextAuth } from '@/hooks/useContextAuth';
+import { dbRefMoisture, dbRefUserSuggestion } from '@/data/firebaseApp';
 
 const HomePage: React.FC = () => {
   const [toggle, setToggle] = useState(false);
   const [_, setMoisture] = useState<number>(0);
   const [suggestion, setSuggestion] = useState<string>('');
+  const { user } = useContextAuth();
 
   useEffect(() => {
-    const uid = firebaseAuth.currentUser?.uid;
+    const uid = user?.uid;
+
     if (uid != null) {
       console.log(uid);
       onValue(dbRefMoisture(uid), (snapshot) => {
@@ -42,7 +41,9 @@ const HomePage: React.FC = () => {
         <div className="flex flex-col">
           <p>
             <span className="text-lg font-medium">Hi,</span>{' '}
-            <span className="text-subTitle2"> ROBERT FOX!</span>
+            <span className="text-subTitle2">
+              {user?.displayName || user?.email}
+            </span>
           </p>
           <p className="text-sm text-appDarkGray">
             What do you want to learn today?
