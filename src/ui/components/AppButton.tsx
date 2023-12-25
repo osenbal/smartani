@@ -3,7 +3,6 @@ import { twMerge } from 'tailwind-merge';
 
 type AppButtonProps = {
   children: React.ReactNode;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: React.ReactNode;
   style?: React.CSSProperties;
   className?: string;

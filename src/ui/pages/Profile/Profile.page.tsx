@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useProfileViewModel } from './Profile.viewModel';
 
 const ProfilePage = () => {
+  const { handleLogout } = useProfileViewModel();
+
   return (
     <div>
       <div className="flex justify-center items-center bg-main-darkGreen py-[72px] rounded-b-2xl">
@@ -53,7 +56,10 @@ const ProfilePage = () => {
           </svg>
         </Link>
 
-        <div className="flex flex-row justify-between bg-white items-center py-3 px-6 rounded-md cursor-pointer transition-all duration-200 hover:bg-gray-200">
+        <button
+          onClick={handleLogout}
+          className="outline-none flex flex-row justify-between bg-white items-center py-3 px-6 rounded-md cursor-pointer transition-all duration-200 hover:bg-gray-200"
+        >
           <p className="text-body2Regular">Logout</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +87,7 @@ const ProfilePage = () => {
               stroke-linecap="round"
             />
           </svg>
-        </div>
+        </button>
       </div>
     </div>
   );

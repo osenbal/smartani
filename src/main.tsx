@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
-import './index.css';
 
+import './index.css';
 import { registerSW } from 'virtual:pwa-register';
 
 // add this to prompt for a refresh

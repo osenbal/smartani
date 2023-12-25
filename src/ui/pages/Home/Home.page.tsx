@@ -1,11 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import AppButton from '@/ui/components/AppButton';
 import ToggleSwitch from '@/ui/components/Form/ToggleSwitch';
 import { Link } from 'react-router-dom';
+import {
+  dbRefMoisture,
+  firebaseAuth,
+  dbRefUserSuggestion,
+} from '@/data/firebaseApp';
+import { onValue } from 'firebase/database';
 
 const HomePage: React.FC = () => {
   const [toggle, setToggle] = useState(false);
+  const [moisture, setMoisture] = useState<number>(0);
+  const [suggestion, setSuggestion] = useState<string>('');
+
+  useEffect(() => {
+    const uid = firebaseAuth.currentUser?.uid;
+    if (uid != null) {
+      console.log(uid);
+      onValue(dbRefMoisture(uid), (snapshot) => {
+        const data = snapshot.val();
+        if (!!data) {
+          setMoisture(data);
+        }
+      });
+
+      onValue(dbRefUserSuggestion(uid), (snapshot) => {
+        const data = snapshot.val();
+        console.log(data);
+        if (!!data) {
+          setSuggestion(data);
+        }
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -112,7 +141,7 @@ const HomePage: React.FC = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <p>Yuk siram tanaman mu!</p>
+              <p>{suggestion}</p>
             </div>
           </div>
 
