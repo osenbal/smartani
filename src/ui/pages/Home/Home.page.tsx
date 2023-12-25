@@ -12,7 +12,7 @@ import { onValue } from 'firebase/database';
 
 const HomePage: React.FC = () => {
   const [toggle, setToggle] = useState(false);
-  const [moisture, setMoisture] = useState<number>(0);
+  const [setMoisture] = useState<number>(0);
   const [suggestion, setSuggestion] = useState<string>('');
 
   useEffect(() => {
