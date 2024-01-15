@@ -10,6 +10,7 @@ const TambahLahanPage = () => {
   const { handleAddLand } = useLand();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleBack = () => {
     navigate(-1);
@@ -26,14 +27,16 @@ const TambahLahanPage = () => {
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    setIsLoading(true);
     const data = new FormData(e.currentTarget);
     const size = data.get('sizeLand') as string;
+
     // split with x
     const wide = size.split('x')[1];
     const length = size.split('x')[0];
 
     if (imageFile === null) return alert('Image is required');
-
     if (categoryId === undefined) return alert('Category is required');
 
     handleAddLand(
@@ -43,9 +46,16 @@ const TambahLahanPage = () => {
       Number(length),
       data.get('locationLand') as string,
       Number(categoryId)
-    ).then((res) => {
-      console.log(res);
-    });
+    )
+      .then(() => {
+        navigate(-1);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -144,6 +154,8 @@ const TambahLahanPage = () => {
           autoComplete="off"
           labelTop={<span>Ukuran</span>}
           iconPlace="left"
+          disabled
+          value={'10x10'}
           placeholder="10x10"
         />
 
@@ -153,10 +165,15 @@ const TambahLahanPage = () => {
           autoComplete="off"
           labelTop={<span>Lokasi</span>}
           iconPlace="left"
-          placeholder="10x10"
+          placeholder="location"
         />
 
-        <AppButton type="submit" className="w-full h-[64px] rounded-xl">
+        <AppButton
+          type="submit"
+          isLoading={isLoading}
+          disabled={isLoading}
+          className="w-full h-[64px] rounded-xl"
+        >
           <span>Simpan</span>
         </AppButton>
       </form>
