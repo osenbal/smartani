@@ -28,7 +28,6 @@ const TambahLahanPage = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setIsLoading(true);
     const data = new FormData(e.currentTarget);
     const size = data.get('sizeLand') as string;
 
@@ -38,6 +37,7 @@ const TambahLahanPage = () => {
 
     if (imageFile === null) return alert('Image is required');
     if (categoryId === undefined) return alert('Category is required');
+    setIsLoading(true);
 
     handleAddLand(
       imageFile,
