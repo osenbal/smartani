@@ -4,6 +4,7 @@
   /* padding: 1.5rem; */
   /* text-align: center; */
   background-color: #f5f5f5;
+  color: #4a4a4a;
   min-height: 100vh;
 }
 
@@ -25,4 +26,34 @@
 /* Sembunyikan scrollbar ketika tidak di-scroll */
 ::-webkit-scrollbar-thumb:hover {
   background-color: #4a4a4a; /* Warna abu-abu lebih gelap saat dihover */
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0px);
+  }
+
+  100% {
+    transform: translateY(1px);
+  }
+}
+
+button:active {
+  animation: bounce 0.3s ease;
+  opacity: 0.8;
+  transition: all 0.3s ease-in-out;
+}
+
+.shimmer-div {
+  background: linear-gradient;
+  animation: shimmer 2s infinite linear;
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(percentage);
+  }
+  to {
+    transform: translateX(percentage);
+  }
 }

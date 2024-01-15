@@ -1,23 +1,27 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
+import { PuffLoader } from 'react-spinners';
 
 type AppButtonProps = {
   children: React.ReactNode;
   icon?: React.ReactNode;
   style?: React.CSSProperties;
   className?: string;
+  isLoading?: boolean;
+  containerClassName?: string;
   iconPosition?: 'left' | 'right';
   colorType?: 'primary' | 'secondary' | 'outline';
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const AppButton: React.FC<AppButtonProps> = ({
   children,
-  onClick,
   icon,
   style,
   className,
+  isLoading,
   iconPosition = 'left',
   colorType = 'primary',
+  containerClassName,
   ...rest
 }) => {
   return (
@@ -30,14 +34,26 @@ const AppButton: React.FC<AppButtonProps> = ({
           'bg-main-darkOrange text-white border-none outline-none hover:opacity-[0.9] active:opacity-[0.9] hover:outline-none hover:border-none active:outline-none active:border-none focus:outline-none focus:border-none',
         colorType === 'outline' &&
           'bg-white text-main-darkGreen border border-main-darkGreen',
+        isLoading && 'opacity-50 cursor-not-allowed',
+        'disabled:opacity-50 disabled:cursor-not-allowed',
+        'max-h-[4rem]',
         className
       )}
       {...rest}
     >
-      <div className="text-ellipsis whitespace-nowrap overflow-hidden max-w-[8rem]">
-        {iconPosition === 'left' ? icon : null}
+      <div
+        className={twMerge(
+          'whitespace-nowrap flex flex-row items-center gap-4',
+          containerClassName
+        )}
+      >
+        {isLoading ? (
+          <PuffLoader color="#36d7b7" size={32} />
+        ) : iconPosition === 'left' ? (
+          icon
+        ) : null}
         {children}
-        {iconPosition === 'left' ? icon : null}
+        {iconPosition === 'right' ? icon : null}
       </div>
     </button>
   );

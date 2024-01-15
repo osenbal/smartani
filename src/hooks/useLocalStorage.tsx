@@ -1,21 +1,22 @@
 import { useState } from 'react';
+import { localStorageOps } from '@/data/localStorage';
 
 export const useLocalStorage = () => {
   const [value, setValue] = useState<string | null>(null);
 
   const setItem = (key: string, value: string) => {
-    localStorage.setItem(key, value);
+    localStorageOps.setItem(key, value);
     setValue(value);
   };
 
   const getItem = (key: string) => {
-    const value = localStorage.getItem(key);
+    const value = localStorageOps.getItem(key);
     setValue(value);
     return value;
   };
 
   const removeItem = (key: string) => {
-    localStorage.removeItem(key);
+    localStorageOps.removeItem(key);
     setValue(null);
   };
 

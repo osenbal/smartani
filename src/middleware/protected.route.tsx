@@ -1,11 +1,10 @@
 // create a middleware to check if the user is authenticated
 import { Outlet, Navigate } from 'react-router-dom';
-import { AuthContext } from '@/context/Auth.context';
-import { useContext } from 'react';
+import { useContextAuth } from '@/hooks/useContextAuth';
 
 const ProtectedRoute = () => {
-  const { isLoggedIn } = useContext(AuthContext);
-  return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
+  const { isLoggedIn } = useContextAuth();
+  return isLoggedIn ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default ProtectedRoute;

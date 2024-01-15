@@ -1,9 +1,13 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
 const BottomNavigation = () => {
+  const location = useLocation();
+
+  console.log(location);
   const listMenu = [
     {
-      menu: '/',
+      menu: '/home',
       iconActive: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -188,12 +192,19 @@ const BottomNavigation = () => {
   ];
 
   return (
-    <div className="bg-white py-6 px-[32px] sm:px[74px] w-full max-w-[480px] mx-auto flex flex-row gap-x-16 justify-between items-center">
+    <div
+      className={twMerge(
+        'bg-white py-6 px-[32px] sm:px[74px] w-full max-w-[480px] mx-auto flex flex-row gap-x-16 justify-between items-center',
+        !['/home', '/notifications', '/profile'].includes(location.pathname) &&
+          'hidden'
+      )}
+    >
       {listMenu.map((item) => (
         <NavLink
+          type="button"
           key={item.menu}
           to={`${item.menu}`}
-          className="flex flex-col items-center transition-all duration-300"
+          className="bg-transparent flex flex-col justify-center items-center focus:bg-transparent transition-all duration-300 active:text-green-500 active:opacity-80 active:scale-90 min-w-[44px] min-h-[44px] rounded-md active:bg-slate-100"
         >
           {({ isActive }) => (
             <>{isActive ? item.iconActive : item.iconInactive}</>

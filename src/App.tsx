@@ -18,11 +18,17 @@ function App() {
       <AuthContextProvider>
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+
             <Route path="/" element={<ProtectedRoute />}>
               <Route element={<MainLayout />}>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/home" element={<HomePage />} />
                 <Route path="/lahan/:lahanId" element={<DetailLahanPage />} />
-                <Route path="/tambah-lahan" element={<TambahLahanPage />} />
+                <Route
+                  path="/tambah-lahan/:categoryId"
+                  element={<TambahLahanPage />}
+                />
                 <Route
                   path="/notifications"
                   element={<ListNotificationPage />}
@@ -31,8 +37,6 @@ function App() {
                 <Route path="/kebun" element={<ListKebun />} />
               </Route>
             </Route>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
           </Routes>
         </BrowserRouter>
       </AuthContextProvider>

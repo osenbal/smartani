@@ -1,11 +1,22 @@
 import AppButton from '@/ui/components/AppButton';
 import AppInput from '@/ui/components/Form/AppInput';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useLoginViewModel } from './Login.viewModel';
+import { useContextAuth } from '@/hooks/useContextAuth';
 
 const LoginPage = () => {
-  const { handleLogin, showPassword, setShowPassword, errorText } =
-    useLoginViewModel();
+  const {
+    handleLogin,
+    showPassword,
+    setShowPassword,
+    errorText,
+    isLoadingLogin,
+  } = useLoginViewModel();
+  const { isLoggedIn } = useContextAuth();
+
+  if (isLoggedIn) {
+    return <Navigate to="/home" />;
+  }
 
   return (
     <div className="p-6">
@@ -32,7 +43,9 @@ const LoginPage = () => {
           <AppInput
             name="email"
             type="email"
+            autoComplete="email"
             labelTop={<span>Email</span>}
+            disabled={isLoadingLogin}
             iconPlace="left"
             placeholder="Enter your email"
           />
@@ -40,8 +53,10 @@ const LoginPage = () => {
           <AppInput
             name="password"
             labelTop={<span>Password</span>}
+            disabled={isLoadingLogin}
             iconPlace="right"
             type={showPassword ? 'text' : 'password'}
+            autoComplete="current-password"
             icon={
               <div
                 className="w-[20px] h-[17px]"
@@ -111,10 +126,12 @@ const LoginPage = () => {
 
         <AppButton
           type="submit"
+          isLoading={isLoadingLogin}
+          disabled={isLoadingLogin}
           colorType="primary"
           className="px-6 py-5 rounded-2xl w-full"
         >
-          <span>Login</span>
+          <span>{isLoadingLogin ? 'Loading...' : 'Login'}</span>
         </AppButton>
       </form>
 

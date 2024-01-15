@@ -1,7 +1,8 @@
 import AppButton from '@/ui/components/AppButton';
 import AppInput from '@/ui/components/Form/AppInput';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import useRegisterViewModel from './Register.viewModel';
+import { useContextAuth } from '@/hooks/useContextAuth';
 
 const RegisterPage = () => {
   const {
@@ -11,7 +12,33 @@ const RegisterPage = () => {
     errorText,
     showConfirmPassword,
     setShowConfirmPassword,
+    isLoadingRegister,
+    isSuccessRegister,
+    navigateToHome,
   } = useRegisterViewModel();
+  const { isLoggedIn } = useContextAuth();
+  if (isSuccessRegister) {
+    return (
+      <div className="p-[58px] flex flex-col justify-center items-center h-screen">
+        <img
+          src="./images/thumb/thumb_successRegister.png"
+          alt="success register"
+        />
+        <p className="text-subTitle2">Welcome SMART TANI</p>
+        <p className="text-body2Semibold text-center mt-[14px] mb-[110px]">
+          Ayo mulai permudah <br /> managemant lahan tani mu!
+        </p>
+
+        <AppButton className="w-full h-16 rounded-2xl" onClick={navigateToHome}>
+          Lanjut
+        </AppButton>
+      </div>
+    );
+  }
+
+  if (isLoggedIn) {
+    return <Navigate to="/home" />;
+  }
 
   return (
     <div className="p-6">
@@ -38,6 +65,8 @@ const RegisterPage = () => {
           <AppInput
             name="email"
             type="email"
+            autoComplete="off"
+            disabled={isLoadingRegister}
             labelTop={<span>Email</span>}
             iconPlace="left"
             placeholder="Enter your email"
@@ -46,6 +75,7 @@ const RegisterPage = () => {
           <AppInput
             name="password"
             autoComplete="new-password"
+            disabled={isLoadingRegister}
             labelTop={<span>Password</span>}
             iconPlace="right"
             type={showPassword ? 'text' : 'password'}
@@ -111,6 +141,7 @@ const RegisterPage = () => {
           <AppInput
             name="confirmPassword"
             autoComplete="new-password"
+            disabled={isLoadingRegister}
             labelTop={<span>Confirmation Password</span>}
             iconPlace="right"
             type={showConfirmPassword ? 'text' : 'password'}
@@ -178,6 +209,8 @@ const RegisterPage = () => {
         <AppButton
           colorType="primary"
           type="submit"
+          disabled={isLoadingRegister}
+          isLoading={isLoadingRegister}
           className="px-6 py-5 rounded-2xl w-full mt-12"
         >
           <span>Register</span>
@@ -187,7 +220,7 @@ const RegisterPage = () => {
       <div className="flex flex-row justify-center items-center mt-[72px]">
         <span>
           Have account? {'  '}
-          <Link to={'/login'} className="font-semibold text-main-darkOrange">
+          <Link to={'/'} className="font-semibold text-main-darkOrange">
             Login
           </Link>
         </span>

@@ -1,4 +1,36 @@
+import { useState } from 'react';
+import { useGarden } from '@/hooks/categoryGarden/useGarden';
+import { twMerge } from 'tailwind-merge';
+import AppButton from '@/ui/components/AppButton';
+
 const ListKebun = () => {
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { gardens, addMyGarden } = useGarden();
+
+  const handleSelectCategory = (id: number) => {
+    if (selectedCategory === id) {
+      setSelectedCategory(null);
+    } else {
+      setSelectedCategory(id);
+    }
+  };
+
+  const handleAddMyGarden = () => {
+    setIsLoading(true);
+    if (selectedCategory != null) {
+      addMyGarden(selectedCategory)
+        .then(() => {
+          setIsLoading(false);
+        })
+        .catch(() => {
+          setIsLoading(false);
+        });
+
+      setSelectedCategory(null);
+    }
+  };
+
   return (
     <div>
       <div className="flex flex-row justify-between items-center bg-white px-6 py-9">
@@ -7,48 +39,65 @@ const ListKebun = () => {
         <img className="w-16 h-16" src="/smartani-logo.png" alt="smartani" />
       </div>
 
-      <div className="mt-[45px] px-6">
+      <div className="mt-[45px] px-6 pb-24">
         <div className="grid grid-cols-2 gap-4">
-          <div className="flex justify-center items-center px-7 py-16 rounded-md bg-white">
-            <p>Kebun kangkung</p>
-          </div>
-          <div className="flex justify-center items-center px-7 py-16 rounded-md bg-white">
-            <p>Kebun kangkung</p>
-          </div>
-          <div className="flex justify-center items-center px-7 py-16 rounded-md bg-white">
-            <p>Kebun kangkung</p>
-          </div>
-          <div className="flex justify-center items-center px-7 py-16 rounded-md bg-white">
-            <p>Kebun kangkung</p>
-          </div>
-
-          <div className="relative flex flex-col justify-center items-center gap-y-2 bg-white  py-10">
-            <div className="p-5 bg-[#F6F9FE] flex items-center justify-center rounded-xl">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-              >
-                <path
-                  d="M8 3.33334V12.6667"
-                  stroke="#034221"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M3.33333 8H12.6667"
-                  stroke="#034221"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>{' '}
+          {gardens.map((garden, index) => (
+            <div
+              key={index}
+              onClick={() => handleSelectCategory(garden.id)}
+              className={twMerge(
+                'flex flex-col justify-center gap-3 items-center min-h-[185px] p-4 rounded-md bg-white cursor-pointer transition-all ease-in-out duration-150',
+                selectedCategory === garden.id &&
+                  'bg-main-darkOrange/50 text-white'
+              )}
+            >
+              <img
+                className="w-[85px] h-[85px]"
+                src={garden.imageUrl}
+                alt={garden.name}
+              />
+              <p>{garden.name}</p>
             </div>
-            <p className="text-center">Tambah Lahan</p>
-          </div>
+          ))}
+        </div>
+
+        <div className="flex">
+          <AppButton
+            type="button"
+            isLoading={isLoading}
+            disabled={selectedCategory === null || isLoading}
+            onClick={handleAddMyGarden}
+            className="mt-10 w-full h-16 rounded-xl"
+            icon={
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="24"
+                  viewBox="0 0 25 24"
+                  fill="none"
+                >
+                  <path
+                    d="M12.5 5V19"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M5.5 12H19.5"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            }
+            iconPosition="left"
+          >
+            <span>Tambah Kebun</span>
+          </AppButton>
         </div>
       </div>
     </div>

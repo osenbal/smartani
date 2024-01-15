@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from 'react';
 import { firebaseAuth } from '@/data/firebaseApp';
 import { User } from 'firebase/auth';
+import { PuffLoader } from 'react-spinners';
 
 interface AuthContext {
   isLoggedIn: boolean;
@@ -50,7 +51,13 @@ export const AuthContextProvider = ({
     <AuthContext.Provider
       value={{ isLoggedIn, setIsLoggedIn, isLoading, user }}
     >
-      {!isLoading && children}
+      {!isLoading ? (
+        children
+      ) : (
+        <div className="flex justify-center items-center h-screen">
+          <PuffLoader color="#FFA45B" />
+        </div>
+      )}
     </AuthContext.Provider>
   );
 };

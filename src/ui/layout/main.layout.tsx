@@ -6,7 +6,7 @@ const MainLayout: React.FC = () => {
   // filter current path to show bottom navigation
   const currentPath = window.location.pathname;
   const isShowBottomNavigation =
-    currentPath !== '/login' && currentPath !== '/register';
+    currentPath !== '/' && currentPath !== '/register';
 
   return (
     <>
