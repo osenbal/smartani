@@ -1,27 +1,57 @@
-# React + TypeScript + Vite
+# Smartani
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p float="left">
+  <img src="screen/login-sc.png" width="30%" />
+  <img src="screen/home-sc.png" width="30%" />
+  <img src="screen/detail-sc.png" width="30%" />
+</p>
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Smartani adalah aplikasi inovatif yang dirancang khusus untuk memudahkan pengelolaan lahan pertanian dan mengoptimalkan proses pertanian melalui otomatisasi. Dengan kombinasi teknologi canggih dan kecerdasan buatan, Smartani memberikan solusi yang efisien dan efektif bagi para petani modern.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Dependencies
 
-- Configure the top-level `parserOptions` property like this:
+- Describe any prerequisites, libraries, OS version, etc., needed before installing program.
+- node version 16.19.0
+- npm vesion 8.19.3
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+### Deploying
+
+- https://smartani.netlify.app
+
+### Executing program
+
+- How to run the program
+
+```
+   clone this project
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+```
+   npm install
+```
+
+```
+   npm run dev (for development)
+```
+
+```
+   npm run build (for production)
+```
+
+## Authors
+
+Contributors names and contact info
+
+[@Osenbal](https://github.com/osenbal)
+Alan
+Septian
+Joko
+
+## Version History
+
+- 0.1
+  - Initial Release
